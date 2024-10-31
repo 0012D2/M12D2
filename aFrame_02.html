@@ -1,0 +1,243 @@
+<html>
+<head>
+        <meta charset="UTF-8">
+        <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Repertorio A-frame</title>
+        <!-- icono del la pestaña -->
+        <link rel="shortcut icon" href="./Biblioteca/Gifs/nerv.gif">
+        <!-- link de la libreria para leer las etiquetas de aframe -->
+        <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+          <!-- scripts para enviroments-->
+        <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+        <!-- script para gifs -->
+        <script src="https://rawgit.com/mayognaise/aframe-gif-shader/master/dist/aframe-gif-shader.min.js"></script>
+        <script src="https://rawgit.com/mayognaise/aframe-gif-component/master/dist/aframe-gif-component.min.js"></script>
+        <!-- para leer animación -->
+        <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+        <!-- script para texturas -->
+        <script src="https://cdn.jsdelivr.net/npm/aframe-enviropacks@latest/aframe-enviropacks.js"></script>
+        <!-- script para texto en 3d -->
+        <script
+            src="https://unpkg.com/aframe-text-geometry-component@^0.5.0/dist/aframe-text-geometry-component.min.js"></script>
+        <!-- script para interacciones -->
+        <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+        <!-- LIBRERIAS DE COLISIONES Y FÍSICAS-->
+        <script
+            src="https://cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.min.js"></script>
+        <script src="https://unpkg.com/aframe-physics-extras@0.1.2/dist/aframe-physics-extras.min.js"></script>
+        <!-- scripts movimiento de la cámara -->
+        <script> src = "https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js" </script>
+        <script> src = "https://unpkg.com/super-hands@2.0.2/dist/super-hands.min.js" </script>
+        <!-- scripts para partículas-->
+        <script src="https://unpkg.com/aframe-animation-component@3.2.1/dist/aframe-animation-component.min.js"></script>
+        <script src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
+        <script
+            src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
+        <script src="https://unpkg.com/aframe-extras.ocean@%5E3.5.x/dist/aframe-extras.ocean.min.js"></script>
+        <script src="https://unpkg.com/aframe-gradient-sky@1.2.0/dist/gradientsky.min.js"></script>
+        <!-- scipts para animacion de agua -->
+        <script src="https://unpkg.com/aframe-animation-component@3.2.1/dist/aframe-animation-component.min.js"></script>
+        <script src="https://unpkg.com/aframe-extras.ocean@%5E3.5.x/dist/aframe-extras.ocean.min.js"></script>
+        <script src="https://unpkg.com/aframe-animation-component@3.2.1/dist/aframe-animation-component.min.js"></script>
+        <!-- scripts para truco de transparencia en modelos 3d-->
+        <script>
+            AFRAME.registerComponent('model-opacity', {
+                schema: { default: 1.0 },
+                init: function () {
+                    // this.el.addEventListener('model-loaded', this.update.bind(this));
+                    this.el.addEventListener("model-loaded", () => {
+                        const object3DEl = this.el.object3DMap;
+                        ;
+   
+   
+   
+   
+                        var mesh = this.el.getObject3D('mesh'); // For hand, the result is undefined
+                        // var mesh = this.el.object3DMap.mesh; // For hand, the result is undefined
+                        console.log(mesh);
+                        var data = this.data;
+                        if (!mesh) { return; }
+                        mesh.traverse(function (node) {
+                            if (node.isMesh) {
+                                ;
+                                node.material.opacity = data;
+                                node.material.transparent = data < 1.0;
+                                node.material.needsUpdate = true;
+                            }
+                        });
+                    }, 2000)
+   
+   
+                },
+                update: function () {
+                    var mesh = this.el.getObject3D('mesh');
+                    var data = this.data;
+                    if (!mesh) { return; }
+                    mesh.traverse(function (node) {
+                        if (node.isMesh) {
+                            ;
+                            node.material.opacity = data;
+                            node.material.transparent = data < 1.0;
+                            node.material.needsUpdate = true;
+                        }
+                    });
+                }
+            });
+        </script>
+   
+</head>
+  
+  <body>
+  
+    <a-scene physics="gravity:-25; debug: false">
+
+<a-assets>
+<!--LLAMANDO IMAGENES Tiene que estar en la misma carpeta del file-->
+     <img id="foto" src="./MEDIA/00 Imagenes/piet.jpeg">
+
+<!-- Llamando MODELOS 3d -->
+    <a-asset-item id="water" src="./MEDIA/03 Modelos/garrafon/Garrafon.gltf" ></a-assets-item>
+    <a-asset-item id="original" src="./MEDIA/03 Modelos/calavera01/calavera01.gltf" ></a-assets-item>
+    <a-asset-item id="dorado" src="./MEDIA/03 Modelos/calavera02/calavera02.gltf" ></a-assets-item>    
+    <a-asset-item id="roca1" src="./MEDIA/03 Modelos/rock_07_4k.gltf/roca1.gltf" ></a-assets-item> 
+    <a-asset-item id="trapea" src="./MEDIA/03 Modelos/WetFloorSign_01_4k.gltf/trapea.gltf" ></a-assets-item>
+    <a-asset-item id="dancer" src="./MEDIA/03 Modelos/dancer/dancer.gltf" ></a-assets-item>
+
+<!-- VIDEO -->
+    <video id="vid" autoplay loop="true" src="./MEDIA/01 Videos/escenario.mov"  ></video>
+
+
+</a-assets>
+
+<!-- AGUA y OCEANO  -->
+<a-entity id="ocean" ocean="density:20; speed:1" position="1 1 1 " scale="6 6" ></a-entity>
+
+
+<!--FIGURAS BASICAS -->
+      <a-box position="-4 .5 -3" rotation="0 45 0" color="#fdf635" static-body></a-box>
+      <!-- <a-sphere position="0 1 -8" radius="3.25" color="#ff0000" static-body></a-sphere> -->
+      <a-cylinder position="3 0 -3" radius="0.5" height="1.5" color="#0073ff" static-body></a-cylinder>
+      <a-plane position="0 .01 -4" rotation="-90 0 0" width="4" height="4" color="#ffffff" material="src: #foto" ></a-plane>
+     
+<!-- Figuras Basicas con Interaccion  -->
+<a-entity geometry="primitive:torus" rotation="0 45 0" position="-8.5 .3 2" scale=".6 .6 .6"
+material="color:pink" animation__mouseenter="property: components.material.material.color; type: color; to: blue; startEvents: mouseenter; dur: 500" animation__mouseleave="property: components.material.material.color; type: color; to: pink; startEvents: mouseleave; dur: 3000"></a-entity>
+
+
+<!-- Figuras 3D -->
+<a-entity gltf-model="#water" position="0 0 -6.3" rotation="0 0 0" scale=".02 .02 .02" static-body></a-entity>
+<a-entity gltf-model="#original" position="-2.45 -0.2 41.5" rotation="0 0 0" scale=".7 .7 .7" ></a-entity>
+<a-entity gltf-model="#dorado" position="-1.57 7.008 17.15" rotation="4.82 45 0" scale=".7 .7 .7" ></a-entity>
+<a-entity gltf-model="#roca1" position="-0.62 4.33 16.67" rotation="0 12 0" scale="25 25 25" static-body ></a-entity>
+<a-entity gltf-model="#trapea" position="-1.3 0 31.68" rotation="0 -15 0" scale="2 2 2" static-body ></a-entity>
+<a-entity gltf-model="#dancer" animation-mixer position="0 0 -11S" rotation="0 0 0" scale="2 2 2" static-body ></a-entity>
+      
+ <!-- Piso invisible -->
+     <a-plane static-body position="0.445 0.030 -1.879" rotation="-90 0 0" color="#0e23aa" scale="200 200" opacity="0"></a-plane>
+
+<!--ESFERA WIREFRAME - Animada en rotacion-->
+      <a-sphere position="0 1 -4" radius="12" wireframe=true ; animation="property:rotation; to: 0 360 180; loop:true ; dur:50000" ></a-sphere>
+
+      <!-- <a-dodecahedron color="#FF926B" radius="5"></a-dodecahedron> -->
+      <a-dodecahedron position="0 0 52.90" color="#FF926B" radius="5" material="color: #77bb41; wireframe: true; wireframeLinewidth: 2" geometry="" visible="" scale="3 3 3"></a-dodecahedron>
+
+      <!--PARED-->
+    <a-box position="4 2 11" material="src: #foto" repeat="2 2" scale="4 4 0.200" static-body></a-box>
+
+      <!--PARED 02 esta--> 
+      <a-box position="-6 2 11" material="src: #foto" repeat="1 1" scale="8.5 4 0.200" static-body></a-box>
+
+      <!--PARED 03 Inicio L-->
+      <a-box position="2 2 9" rotation="0 90 0" material="src: #foto" repeat="1 1" scale="4 4 0.2" static-body></a-box>
+
+      <!--PARED 04 Inicio R-->
+      <a-box position="-2 2 9" rotation="0 90 0" material="src: #foto" repeat="1 1" scale="4 4 0.2" static-body></a-box>      
+
+        <!--PARED 05 Muro 14metros-->
+      <a-box position="0 2 14" material="src: #foto" repeat="1 1" scale="12 4 0.2" static-body></a-box>
+
+      <!-- PAREDES -->
+      <a-box position="8 2 11" material="src: #foto" repeat="2 2" scale="4 4 0.2" static-body></a-box>
+
+      <a-box position="6 2 20.07103" material="src:#foto" repeat="1 1" scale="12 4 0.2" static-body rotation="0 90 0"></a-box>
+
+      <a-box position="9.95543 2 20.5" material="src:#foto" repeat="2 2" scale="19 4 0.2" static-body rotation="0 90 0"></a-box>
+
+      <a-box position="-10.2 2 19" material="src:#foto" repeat=".8 .8" scale="16 4 0.2" static-body rotation="0 90 0"></a-box>
+
+      <!-- PARED INTERIOR PATIO -->
+      <a-box position="-6 2 20.5" material="src:#foto" repeat="1 1" scale="7 4 0.2" static-body rotation="0 90 0"></a-box>
+
+      <!-- Pared Interior Larga -->
+      <a-box position="1.57524 2 25" material="src: #foto" repeat="2 2" scale="16 4 0.2" static-body rotation="0 90 0"></a-box>
+      <a-box position="8 2 30" material="src: #foto" repeat="2 2" scale="4 4 0.2" static-body></a-box>
+
+      <a-box position="3.5 2 33" material="src: #foto" repeat="2 2" scale="4 4 0.2" static-body></a-box>
+
+      <!-- Esquina por Arbol Exterior -->
+      <a-box position="-6.2511 2 27.07" material="src: #foto" repeat="1 1" scale="8 4 0.2" static-body></a-box>
+
+      <!-- Pared Salida 1 -->
+      <a-box position="-2.25 2 30" material="src: #foto" repeat=".8 .8" scale="6 4 0.2" static-body rotation="0 90 0"></a-box>
+
+      <a-box position="9.95543 2 39.55243" material="src: #foto" repeat="2 2" scale="19 4 0.2" static-body rotation="0 90 0"></a-box>
+
+      <!--TECHO-->
+      <a-box position="0 4.2 12.5" material="src: #foto" repeat="1 1" scale="12 4 0.5" rotation="90 0 0" static-body></a-box>
+
+      <a-box position="0 4.2 22.16863" material="src: #foto" repeat="1 1" scale="12 10 0.5" rotation="90 0 0" static-body></a-box>
+
+      <!-- ESCALERA  -->
+
+      <a-box position="-4.25832 2 31.5652" material="src: #foto" repeat="1 1" scale="3.5 10 0.5" rotation="-65 0 0" static-body></a-box>
+
+      <a-box position="9.9121 6.16283 24.59447" material="src: #foto" repeat="1 1" scale="3.5 10 0.5" rotation="-65 -90 0" static-body></a-box>
+
+
+<!-- Camara (Si cambio la posicion no funcionan las paredes estaticas :< )-->
+              <!-- Luces (Si añadimos luces, A-frame quita las default automaticamente) -->       
+              <a-entity movement-controls kinematic-body>
+                <a-entity id="camera" camera position="0 2.5 0" look-controls light="intensity:0.8; type:spot; penumbra:1; distance:40; angle:45">
+        <a-entity cursor="fuse: true; fuseTimeout: 500"
+         position="0 0 -1" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.023"
+         material="color: white; shader: flat"> </a-entity>      
+        </a-entity>
+        </a-entity>
+
+         <!-- Agregando un CURSOR central -->
+         <a-entity cursor="fuse: true; fuseTimeout: 500"
+         position="0 0 -1" geometry="primitive: ring; radiusInner: 0.2; radiusOuter: 0.023"
+         material="color: white; shader: flat"> </a-entity>
+
+      <!--ESCENARIO AMBIENTE GENERAL-->
+      <a-entity environment=" preset: tron; groundColor:#2659f2;groundColor2: #26f259;groundDensity: .5; skyType:gradient; skyColor: #033954; horizonColor: #f22634; fog: .75; playArea: 2; stageArea: 35; ground: hills; groundYScale: 60; dressing: trees; dressingAmount: 60; dressingColor: #ffffff; dressingScale: 12; dressingVariance: 0 2 0; dressingUniformScale: true; grid: xlines"></a-entity>
+
+      <!-- PLATAFORMA 2do Piso  -->
+ <a-box position="16.33292 8 24.59" material="src: #foto" repeat="1 1" scale="4 4 1" rotation="90 0 0" static-body animation__position="property:position; to: -24 8 24.59; loop:true; dur:20000; easing: linear; dir:alternate"></a-box>
+
+
+ <!-- Luces (Si añadimos luces, A-frame quita las default automaticamente) -->  
+<a-entity light="type: directional; color: #FFF; intensity: 0.1" position="-0.5 1 1"></a-entity>
+   
+
+
+<!-- Llamando Gifs -->
+<a-entity position="-0.35 4 33.15" geometry="primitive: plane; width: 4; height: 8" material="shader: gif; src: url(./MEDIA/04 Gifs/face.GIF); repeat: 1 1; transparent: true; alphaTest: 0.5; side: double" rotation="0 0 0"></a-entity>
+
+<a-entity position="5.5 1.5 -6" geometry="primitive: plane; width: 4; height: 8" material="shader: gif; src: url(./MEDIA/04 Gifs/cerro.GIF); repeat: 1 1; transparent: true; alphaTest: 0.5; side: double" rotation="0 -45 0" static-body></a-entity>
+
+<a-entity position="-5.5 1.5 -6" geometry="primitive: plane; width: 4; height: 8" material="shader: gif; src: url(./MEDIA/04 Gifs/cerro.GIF); repeat: 1 1; transparent: true; alphaTest: 0.5; side: double" rotation="0 45 0" static-body></a-entity>
+
+ <!-- Dodecaedro con gif-->
+<a-sphere position="8.85 6.22 10.23" static-body radius="1.25" geometry="primitive: dodecahedron" scale=".3 .3 .3"  material="shader: gif; src: url(https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2lhOThmOWVjcG9qd3RvdDQxaW5ud3NsZTh5amY3MTIxbGZpbmc4eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/zdZbzRbwIZS7YsNUkM/giphy.gif)" animation__escala="property:scale; to: .7 .7 .7; loop:true; dur:4500; easing: linear; dir: alternate" animation__rotacion="property:rotation; to: 360 360 360; loop:true; dur:5000; easing: linear" animation__position="property:position; to: -8.85 6.22 10.23; loop:true; dur:1000; easing: easeInSine; dir:alternate"></a-sphere>
+
+<!-- LLAMANDO VIDEOS -->
+<a-video src="#vid" scale="4 2.5 1" rotation="0 90 0" position="17.460 2.423 0"></a-video>
+
+    
+
+</a-scene>
+ 
+</body>
+</html>
